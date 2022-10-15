@@ -1,0 +1,126 @@
+[
+  {
+    "index": 1,
+    "timestamp": "2022-08-06 16:33:10.556457",
+    "data": "Bloco gênese",
+    "proof": 1,
+    "previous_hash": null
+  },
+  {
+    "index": 2,
+    "timestamp": "2022-08-06 16:34:03.765932",
+    "data": {
+      "id": "1",
+      "name": "Scattergun",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/1/1b/Item_icon_Scattergun.png/100px-Item_icon_Scattergun.png",
+      "type": "weapon",
+      "owner": "gabiuss"
+    },
+    "proof": 632238,
+    "previous_hash": "22684f4bc9a409a14b9de475eaa92e1e648b20893762181b74cb9886ddd1cc24"
+  },
+  {
+    "index": 3,
+    "timestamp": "2022-08-06 16:34:53.981852",
+    "data": {
+      "id": "2",
+      "name": "Rocket Jumper",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/5/53/Item_icon_Rocket_Jumper.png/100px-Item_icon_Rocket_Jumper.png",
+      "type": "weapon",
+      "owner": "treasurehunter26"
+    },
+    "proof": 403091,
+    "previous_hash": "e2ff37ee763a4f67b9fa76aae4f5b7303e407232802c60ae79621a82b9251b61"
+  },
+  {
+    "index": 4,
+    "timestamp": "2022-08-06 16:35:20.514357",
+    "data": {
+      "id": "3",
+      "name": "Noise Maker",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/0/06/Item_icon_Noise_Maker_Bundle.png/100px-Item_icon_Noise_Maker_Bundle.png",
+      "type": "consumable",
+      "owner": "slytherin_nemo"
+    },
+    "proof": 714736,
+    "previous_hash": "3bee43c28c1b5cd3bdd82d6f5704e8823e79dccd73e84aa31ddc9c6b37ca5ae9"
+  },
+  {
+    "index": 5,
+    "timestamp": "2022-08-06 16:36:10.634580",
+    "data": {
+      "id": "4",
+      "name": "Summer Starter Kit",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/5/5e/Item_icon_Summer_Starter_Kit.png/100px-Item_icon_Summer_Starter_Kit.png",
+      "type": "consumable",
+      "owner": "amendobobopopoo"
+    },
+    "proof": 476581,
+    "previous_hash": "5e04ffbddb946c23fc7af93b2f69d4ebd7700a37b98cdfa83b53ed4563796992"
+  },
+  {
+    "index": 6,
+    "timestamp": "2022-08-06 16:36:42.252140",
+    "data": {
+      "id": "5",
+      "name": "Professional's Panama",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/7/72/Item_icon_Professional%27s_Panama.png/75px-Item_icon_Professional%27s_Panama.png",
+      "type": "cosmetic",
+      "owner": "jimmy_hellpart"
+    },
+    "proof": 431630,
+    "previous_hash": "c61001200a922812c8d0b5d0a3c9ffc2b53f2079776b2bb75a35aa3cf061d3cd"
+  },
+  {
+    "index": 7,
+    "timestamp": "2022-08-06 16:37:33.033145",
+    "data": {
+      "id": "6",
+      "name": "Lollichop",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/6/65/Item_icon_Lollichop.png/100px-Item_icon_Lollichop.png",
+      "type": "weapon",
+      "owner": "gabiuss"
+    },
+    "proof": 1108970,
+    "previous_hash": "69ddf001035de8ce6ad6566959ad7d8c488254c5ee9b83ed5f70bbb9bb83171e"
+  },
+  {
+    "index": 8,
+    "timestamp": "2022-08-06 16:46:31.409859",
+    "data": {
+      "id": "7",
+      "name": "Crusader's Crossbow",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/9/9c/Item_icon_Crusader%27s_Crossbow.png/100px-Item_icon_Crusader%27s_Crossbow.png",
+      "type": "weapon",
+      "owner": "n0type"
+    },
+    "proof": 405575,
+    "previous_hash": "f2ad328fe066f5c6b990f7cc0fe3c48b398a3bee715e765119d8cc495893a31e"
+  },
+  {
+    "index": 9,
+    "timestamp": "2022-08-06 16:47:10.170930",
+    "data": {
+      "id": "8",
+      "name": "Twisted Topper",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/6/6a/Item_icon_Twisted_Topper.png/75px-Item_icon_Twisted_Topper.png",
+      "type": "cosmetic",
+      "owner": "gshade75"
+    },
+    "proof": 737640,
+    "previous_hash": "d313559c684223663c170329eab8541c0b6818c9047656dec6aa2c101673f3cf"
+  },
+  {
+    "index": 10,
+    "timestamp": "2022-08-06 16:47:50.442453",
+    "data": {
+      "id": "9",
+      "name": "Spine-Chilling Skull",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/4/4c/Item_icon_Spine-Chilling_Skull.png/75px-Item_icon_Spine-Chilling_Skull.png",
+      "type": "cosmetic",
+      "owner": "slytherin_nemo"
+    },
+    "proof": 600516,
+    "previous_hash": "1a9edf3d4430952554144d030e08f29bf4f352cf230d234e815a63c363fecd5b"
+  }
+]

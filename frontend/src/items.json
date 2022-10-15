@@ -1,0 +1,83 @@
+[
+    { 
+      "id": 1,
+      "name": "Scattergun",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/1/1b/Item_icon_Scattergun.png/100px-Item_icon_Scattergun.png",
+      "type": "weapon",
+      "owner": "gabiuss",
+      "previousHash": "0003...wuui",
+      "timestamps": ""
+    },
+    { 
+      "id": 2,
+      "name": "Rocket Jumper",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/5/53/Item_icon_Rocket_Jumper.png/100px-Item_icon_Rocket_Jumper.png",
+      "type": "weapon",
+      "owner": "treasurehunter26",
+      "previousHash": "000f...fhjd",
+      "timestamps": ""
+    },
+    { 
+      "id": 3,
+      "name": "Noise Maker",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/0/06/Item_icon_Noise_Maker_Bundle.png/100px-Item_icon_Noise_Maker_Bundle.png",
+      "type": "consumable",
+      "owner": "slytherin_nemo",
+      "previousHash": "000j...kdhs",
+      "timestamps": ""
+    },
+    { 
+      "id": 4,
+      "name": "Summer Starter Kit",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/5/5e/Item_icon_Summer_Starter_Kit.png/100px-Item_icon_Summer_Starter_Kit.png",
+      "type": "consumable",
+      "owner": "amendobobopopoo",
+      "previousHash": "0003...08nd",
+      "timestamps": ""
+    },
+    { 
+      "id": 5,
+      "name": "Professional's Panama",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/7/72/Item_icon_Professional%27s_Panama.png/75px-Item_icon_Professional%27s_Panama.png",
+      "type": "cosmetic",
+      "owner": "jimmy_hellpart",
+      "previousHash": "000k...8sss",
+      "timestamps": ""
+    },
+    { 
+      "id": 6,
+      "name": "Lollichop",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/6/65/Item_icon_Lollichop.png/100px-Item_icon_Lollichop.png",
+      "type": "weapon",
+      "owner": "gabiuss",
+      "previousHash": "0003...dhud",
+      "timestamps": ""
+    },
+    { 
+      "id": 7,
+      "name": "Crusader's Crossbow",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/9/9c/Item_icon_Crusader%27s_Crossbow.png/100px-Item_icon_Crusader%27s_Crossbow.png",
+      "type": "weapon",
+      "owner": "n0type",
+      "previousHash": "0003...yyyy",
+      "timestamps": ""
+    },
+    { 
+      "id": 8,
+      "name": "Twisted Topper",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/6/6a/Item_icon_Twisted_Topper.png/75px-Item_icon_Twisted_Topper.png",
+      "type": "cosmetic",
+      "owner": "gshade75",
+      "previousHash": "0003...hjsd",
+      "timestamps": ""
+    },
+    { 
+      "id": 9,
+      "name": "Spine-Chilling Skull",
+      "imageUrl": "https://wiki.teamfortress.com/w/images/thumb/4/4c/Item_icon_Spine-Chilling_Skull.png/75px-Item_icon_Spine-Chilling_Skull.png",
+      "type": "cosmetic",
+      "owner": "slytherin_nemo",
+      "previousHash": "0003...dhsj",
+      "timestamps": ""
+    }
+]
