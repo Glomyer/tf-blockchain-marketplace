@@ -1,7 +1,19 @@
+import os
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import datetime
-import hashlib
+import json
+from hexbytes import HexBytes
+from web3 import Web3
+
+from dotenv import load_dotenv
+load_dotenv()
+
+
+class HexJsonEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, HexBytes):
+            return obj.hex()
+        return super().default(obj)
 
 
 try:
@@ -10,141 +22,56 @@ except ImportError:
     import simplejson as json
 
 
-class Blockchain:
+class Connection:
+    def __init__(self) -> None:
+        self.infura_url = f'https://goerli.infura.io/v3/{os.getenv("API_KEY")}'
+        self.web3 = Web3(Web3.HTTPProvider(self.infura_url))
+        self.contract_address = "0x06C9f7c92A3ed9B26234Fd926844E5E581c0b685"
+        self.contract_abi = json.loads('[{"inputs":[{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_type","type":"string"},{"internalType":"string","name":"_url","type":"string"},{"internalType":"address","name":"owner","type":"address"}],"name":"store","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"retrieve","outputs":[{"components":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"uint256","name":"timestamp","type":"uint256"},{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"item_type","type":"string"},{"internalType":"string","name":"img_url","type":"string"},{"internalType":"address","name":"owner","type":"address"}],"internalType":"struct tf.Item[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"}]')
+        self.contract = self.web3.eth.contract(
+            address=self.contract_address, abi=self.contract_abi)
 
-    def __init__(self):
-        self.load_chain()
+        self.from_account = "0xa106139Dbd0befaC56be421426BC5376c5473515"
+        self.private_key = f'{os.getenv("PRIVATE_KEY")}'
 
-    def load_chain(self):
-        with open("blockchain.json", "r") as file:
-            data = json.load(file)
-            self.chain = data
+    def fetch_items(self):
+        items = self.contract.functions.retrieve().call()
+        return items
 
-        if not self.chain:
-            self.create_block(proof=1, previous_hash=None, data="Bloco gênese")
+    def create_item(self, name, img_url, type, owner):
+        tx = self.contract.functions.store(
+            name, img_url, type, owner).build_transaction()
+        tx.update(
+            {'nonce': self.web3.eth.get_transaction_count(self.from_account)})
 
-    def create_block(self, proof, previous_hash, data):
-        if type(data) == type({}):
-            data.update({'id': str(len(self.chain) + 1)})
+        tx['gas'] = self.contract.functions.store(name, img_url, type, owner).estimateGas()
+        signed_tx = self.web3.eth.account.sign_transaction(tx, self.private_key)
+        tx_hash = self.web3.eth.send_raw_transaction(signed_tx.rawTransaction)
+        print("Transaction hash:", self.web3.toHex(tx_hash))
+        transaction_receipt = self.web3.eth.wait_for_transaction_receipt(tx_hash)
+        print("Transaction receipt:\n", transaction_receipt)
 
-        block = {
-            "index": len(self.chain) + 1,
-            "timestamp": str(datetime.datetime.now()),
-            "data": data,
-            "proof": proof,
-            "previous_hash": previous_hash,
-        }
-        
-        self.chain.append(block)
-        with open("blockchain.json", "w") as file:
-            file.write(json.dumps(self.chain, ensure_ascii=False))
-
-        return block
-
-    def get_chain(self):
-        self.load_chain()
-        return self.chain
-
-    def return_previous_block(self):
-        self.load_chain()
-        return self.chain[-1]
-
-
-    def proof_of_work(self, previous_proof):
-        new_proof = 1
-        check_proof = False
-
-        while check_proof is False:
-            hash_operation = hashlib.sha256(
-                str(new_proof**2 - previous_proof**2).encode()
-            ).hexdigest()
-            if hash_operation[:5] == "00000":
-                check_proof = True
-                print(hash_operation)
-            else:
-                new_proof += 1
-
-        return new_proof
-
-    def hash(self, block):
-        encoded_block = json.dumps(block, sort_keys=True).encode()
-        return hashlib.sha256(encoded_block).hexdigest()
-
-    def chain_valid(self, chain):
-        self.load_chain()
-    
-        previous_block = chain[0]
-        block_index = 1
-
-        while block_index < len(chain):
-            block = chain[block_index]
-            if block["previous_hash"] != self.hash(previous_block):
-                return False
-
-            previous_proof = previous_block["proof"]
-            proof = block["proof"]
-            hash_operation = hashlib.sha256(
-                str(proof**2 - previous_proof**2).encode()
-            ).hexdigest()
-
-            if hash_operation[:5] != "00000":
-                return False
-            previous_block = block
-            block_index += 1
-
-        return True
+        return transaction_receipt
 
 
 app = Flask(__name__)
 CORS(app)
-blockchain = Blockchain()
+blockchain = Connection()
 
 
-@app.route("/create-block", methods=["POST"])
-def mine_block():
-    data = request.json
-
-    previous_block = blockchain.return_previous_block()
-    previous_proof = previous_block["proof"]
-    proof = blockchain.proof_of_work(previous_proof)
-    previous_hash = blockchain.hash(previous_block)
-    block = blockchain.create_block(proof, previous_hash, data)
-
-    response = {
-        "index": block["index"],
-        "data": block["data"],
-        "timestamp": block["timestamp"],
-        "proof": block["proof"],
-        "previous_hash": block["previous_hash"],
-    }
-
-    return jsonify(response), 200
+@app.route("/fetch-items", methods=["GET"])
+def fetch_items():
+    items = blockchain.fetch_items()
+    return jsonify(items), 200
 
 
-@app.route("/get-chain", methods=["GET"])
-def display_chain():
-    blockchain_blocks = blockchain.get_chain()
-    chain = []
-    
-    for block in blockchain_blocks:
-        encoded_block = json.dumps(block, sort_keys=True).encode()
-        block_with_hash = block.copy()
-        block_with_hash['hash'] =  hashlib.sha256(encoded_block).hexdigest()
-        chain.append(block_with_hash)
+@app.route("/create-item", methods=["POST"])
+def create_item():
+    data = request.form
+    receipt = blockchain.create_item(
+        data["name"], data["imageUrl"], data["type"], data["owner"])
 
-    response = {"chain": chain, "length": len(chain)}
-    return jsonify(response), 200
-
-
-@app.route("/is-valid", methods=["GET"])
-def valid():
-    valid = blockchain.chain_valid(blockchain.chain)
-
-    if valid:
-        response = {"message": "The Blockchain is valid."}
-    else:
-        response = {"message": "The Blockchain is not valid."}
-    return jsonify(response), 200
+    return jsonify(str(receipt)), 200
 
 
 # Run the flask server locally
