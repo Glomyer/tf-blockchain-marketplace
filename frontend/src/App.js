@@ -9,8 +9,23 @@ export default function App() {
   const [items, setItems] = useState([]);
 
   const getItems = () => {
-    api.get('/get-chain').then(response => {
-      setItems(response.data.chain);
+    api.get('/fetch-items').then(response => {
+      const { data } = response;
+
+      setItems(data.map((values) => {
+        const [id, timestamp, name, imageUrl, type, owner ] = values;
+
+        return {
+          timestamp,
+          data: {
+            id,
+            name,
+            imageUrl,
+            type,
+            owner,
+          }
+        }
+      }));
     });
   };
 
@@ -19,8 +34,12 @@ export default function App() {
   }, []);
 
   const addItem = (item) => {
-    api.post('/create-block', item)
+    api.post('/create-item', item)
     .then(() => getItems());
+  };
+
+  const refreshItems = () => {
+    getItems();
   };
 
   return (
@@ -40,6 +59,15 @@ export default function App() {
             onClick={() => setShow(true)}
           >
             Insert Item
+          </Button>
+        </Col>
+        <Col sm={1}>
+          <Button
+              size="lg"
+              variant="outline-primary"
+              onClick={refreshItems}
+            >
+              Refresh
           </Button>
         </Col>
       </Row>

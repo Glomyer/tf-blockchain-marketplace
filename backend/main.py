@@ -1,3 +1,4 @@
+import ast
 import os
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -28,9 +29,7 @@ class Connection:
         self.web3 = Web3(Web3.HTTPProvider(self.infura_url))
         self.contract_address = "0x06C9f7c92A3ed9B26234Fd926844E5E581c0b685"
         self.contract_abi = json.loads('[{"inputs":[{"internalType":"string","name":"_name","type":"string"},{"internalType":"string","name":"_type","type":"string"},{"internalType":"string","name":"_url","type":"string"},{"internalType":"address","name":"owner","type":"address"}],"name":"store","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"retrieve","outputs":[{"components":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"uint256","name":"timestamp","type":"uint256"},{"internalType":"string","name":"name","type":"string"},{"internalType":"string","name":"item_type","type":"string"},{"internalType":"string","name":"img_url","type":"string"},{"internalType":"address","name":"owner","type":"address"}],"internalType":"struct tf.Item[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"}]')
-        self.contract = self.web3.eth.contract(
-            address=self.contract_address, abi=self.contract_abi)
-
+        self.contract = self.web3.eth.contract(address=self.contract_address, abi=self.contract_abi)
         self.from_account = "0xa106139Dbd0befaC56be421426BC5376c5473515"
         self.private_key = f'{os.getenv("PRIVATE_KEY")}'
 
@@ -67,7 +66,7 @@ def fetch_items():
 
 @app.route("/create-item", methods=["POST"])
 def create_item():
-    data = request.form
+    data = ast.literal_eval(request.data.decode())
     receipt = blockchain.create_item(
         data["name"], data["imageUrl"], data["type"], data["owner"])
 

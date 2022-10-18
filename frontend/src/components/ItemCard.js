@@ -15,12 +15,6 @@ export default function ItemCard({ item }) {
 
             <strong>Timestamp:</strong>
             <p>{item.timestamp}</p>
-
-            <strong>Hash:</strong>
-            <p>{item.hash}</p>
-
-            <strong>Previous hash:</strong>
-            <p>{item.previous_hash}</p>
           </Card.Text>
         </Card.Body>
       </Card>
