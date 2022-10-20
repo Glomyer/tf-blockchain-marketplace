@@ -1,0 +1,25 @@
+div.header{
+  background-image: url("header.png");
+
+  color: wheat;
+  border: 3px inset black;
+}
+
+div#root{
+  background-image: url("paper.jpg");
+  
+}
+
+.btn {
+  background-color: rgba(255,255,255);
+  color: green;
+  font-weight: bold;
+  border: 3px solid green;
+}
+
+.trade-btn{
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  border: 3px solid black;
+}
